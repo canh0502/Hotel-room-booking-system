@@ -32,7 +32,15 @@
 ---
 
 ## 2. Non-Functional Requirements
-*(to be added)*
+
+- **NFR2.1** – **Performance:** The system must return room search results within 2-3 seconds under normal load
+- **NFR2.2** – **Security:** User passwords must be hashed; payment information must follow basic security standards
+- **NFR2.3** – **Scalability:** The system should support adding more hotels/branches in the future
+- **NFR2.4** – **Reliability:** Double booking of the same room must never occur under any circumstances
+- **NFR2.5** – **Availability:** The system should operate 24/7 with minimal downtime
+- **NFR2.6** – **Usability:** The interface must be simple and easy to use for both customers and receptionists
+- **NFR2.7** – **Maintainability:** Code should be organized following a clear architecture (e.g. MVC) for easy modification and extension
+- **NFR2.8** – **Compatibility:** The web interface must work well on major browsers (Chrome, Edge, Firefox)
 
 ## 3. Data Flow Diagram
 *(to be added)*
