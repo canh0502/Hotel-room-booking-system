@@ -2,8 +2,6 @@
 #include <limits>
 #include "BookingSystem.h"
 
-// Console-based interface (see requirements.md section 7 - Interface Design
-// Description, console fallback) for the Hotel Room Booking System.
 
 static void clearInput() {
     std::cin.clear();
