@@ -6,8 +6,6 @@
 #include "Room.h"
 #include "Booking.h"
 
-// Core system logic: loading/saving data and implementing the functional
-// requirements (FR1.x - FR4.x) from requirements.md
 class BookingSystem {
 private:
     std::vector<Room> rooms;
@@ -26,7 +24,6 @@ public:
     void load();
     void save() const;
 
-    // Guest features (FR1.x)
     std::vector<Room> searchAvailableRooms(const std::string& checkIn,
                                             const std::string& checkOut,
                                             int guests) const;
@@ -36,13 +33,11 @@ public:
     bool cancelBooking(int bookingId);
     void listBookingsByGuestPhone(const std::string& phone) const;
 
-    // Receptionist features (FR2.x)
     void listAllBookings() const;
     bool checkIn(int bookingId);
     bool checkOut(int bookingId);
     bool makePayment(int bookingId, double amount);
 
-    // Admin features (FR3.x)
     void addRoom(const std::string& number, const std::string& type,
                  double price, int capacity);
     bool removeRoom(int roomId);
