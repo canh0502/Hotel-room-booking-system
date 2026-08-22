@@ -18,9 +18,6 @@ int BookingSystem::nextBookingId() const {
     for (const auto& b : bookings) maxId = std::max(maxId, b.id);
     return maxId + 1;
 }
-
-// FR4.1 - prevent overbooking: two bookings on the same room overlap if
-// checkIn < otherCheckOut and checkOut > otherCheckIn
 bool BookingSystem::isRoomAvailable(int roomId, const std::string& checkIn,
                                      const std::string& checkOut,
                                      int ignoreBookingId) const {
@@ -54,8 +51,6 @@ void BookingSystem::save() const {
     std::ofstream bf(bookingFile);
     for (const auto& b : bookings) bf << b.toCSV() << "\n";
 }
-
-// ---------------- Guest features (FR1.x) ----------------
 
 std::vector<Room> BookingSystem::searchAvailableRooms(const std::string& checkIn,
                                                        const std::string& checkOut,
@@ -108,8 +103,6 @@ void BookingSystem::listBookingsByGuestPhone(const std::string& phone) const {
     }
 }
 
-// ---------------- Receptionist features (FR2.x) ----------------
-
 void BookingSystem::listAllBookings() const {
     std::cout << std::left << std::setw(6) << "ID" << std::setw(8) << "Room"
               << std::setw(16) << "Guest" << std::setw(12) << "CheckIn"
@@ -156,8 +149,6 @@ bool BookingSystem::makePayment(int bookingId, double amount) {
     }
     return false;
 }
-
-// ---------------- Admin features (FR3.x) ----------------
 
 void BookingSystem::addRoom(const std::string& number, const std::string& type,
                              double price, int capacity) {
