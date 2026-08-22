@@ -43,16 +43,79 @@
 - **NFR2.8** – **Compatibility:** The web interface must work well on major browsers (Chrome, Edge, Firefox)
 
 ## 3. Data Flow Diagram
-*(to be added)*
+
+### Context Diagram (Level 0)
+External entities interacting with the system:
+- **Guest** → sends booking requests → System → returns booking confirmations
+- **Receptionist** → sends check-in/check-out actions → System → returns room status
+- **Admin** → receives reports → System
+
+### Level 1 DFD
+
+**Processes:**
+- **1.0 Booking** – receives requests from Guest, checks/updates `D1 - Room`, creates a record in `D2 - Booking`
+- **2.0 Payment** – reads `D2 - Booking`, records transaction in `D3 - Payment`
+- **3.0 Check-in / Check-out** – reads `D2 - Booking`, updates `D1 - Room` status, interacts with Receptionist
+
+**Data stores:**
+- **D1 - Room**: room info, type, price, status
+- **D2 - Booking**: booking records, dates, guest info
+- **D3 - Payment**: transaction records, amount, method
 
 ## 4. Use Case Diagram
-*(to be added)*
+
+**Actors:** Guest, Receptionist, Admin
+
+**Use cases:**
+| Actor | Use cases |
+|---|---|
+| Guest | Search rooms, Book a room, Make payment, Manage booking (view/edit/cancel) |
+| Receptionist | Check-in / Check-out, Manage booking (walk-in) |
+| Admin | Manage rooms, View reports |
+
+**Relationships:**
+- Guest → Search rooms, Book a room, Make payment, Manage booking
+- Receptionist → Check-in/out, Manage booking
+- Admin → Manage rooms, View reports
+- "Book a room" includes "Make payment" (extend/include relationship, optional to model explicitly)
 
 ## 5. Class Diagram
-*(to be added)*
+
+**Classes:**
+- **Guest**: id, name, email, phone — register(), login(), searchRooms()
+- **Booking**: id, checkInDate, checkOutDate, status — createBooking(), cancelBooking()
+- **Room**: id, number, status — updateStatus()
+- **RoomType**: id, name, price, capacity
+- **Payment**: id, amount, method, status — processPayment()
+- **Staff**: id, name, role — checkIn(), checkOut()
+
+**Relationships:**
+- Guest (1) → Booking (many): a guest makes multiple bookings
+- Booking (many) → Room (1): each booking reserves one room
+- Room (many) → RoomType (1): each room belongs to one room type
+- Booking (1) → Payment (1): each booking has one payment
+- Staff (1) → Booking (many): staff manage multiple bookings (check-in/out)
 
 ## 6. Data Model
 *(to be added)*
 
 ## 7. Interface Design Description
-*(to be added)*
+
+### Screen: Room Search & Booking (Guest)
+- **Search bar**: check-in date, check-out date, number of guests, "Search" button
+- **Results list**: room cards showing room type, capacity, price/night, and a "Select" button
+- Selecting a room leads to booking confirmation, then payment
+
+### Screen: Room Details
+- Photos, amenities, price, capacity, availability calendar, "Book now" button
+
+### Screen: My Bookings (Guest)
+- List of current/past bookings with status, dates, and options to view/edit/cancel
+
+### Screen: Reception Dashboard (Receptionist)
+- Table of today's bookings with check-in/check-out actions and room status controls
+
+### Screen: Admin Dashboard
+- Room management (CRUD), staff management, revenue/occupancy reports, promotions
+
+*(Note: if implemented as a console application, describe each screen above as text-based menus/prompts instead.)*
